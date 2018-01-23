@@ -1,0 +1,101 @@
+﻿@model Giftlist.Item
+
+@{
+	ViewBag.Title = "Edit";
+}
+<!DOCTYPE html>
+<head>
+	<title>Edit an item in your list</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<script src="~/Scripts/jquery-1.10.2.js"></script>
+	<script src="~/Scripts/GiftList.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Knewave' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Allura' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+	<link href="~/Assets/Style.css" rel="stylesheet" />
+</head>
+<body>
+
+	<div class="TopBar">
+		<div id="Account">
+			<div id="CurrentUserName">@HttpContext.Current.Session["CurrentUserName"] <span style="font-size: 75%;">▼</span></div>
+			<div id="AccountOptions">
+				<ul>
+					<li><a href="~/Home/ChangePassword">Change Password</a></li>
+					<li><a href="~/Home/Logout">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="OtherContent">
+		<h2>Edit</h2>
+
+		@using (Html.BeginForm())
+		{
+			@Html.AntiForgeryToken()
+			@Html.ValidationSummary(true)
+
+			<fieldset>
+				<legend>Item</legend>
+
+				@Html.HiddenFor(model => model.ItemId)
+
+				<div class="formlabel float-left">
+					@Html.LabelFor(model => model.Title)
+				</div>
+				<div class="forminput float-left">
+					@Html.TextBoxFor(model => model.Title, new { @class = "TextboxFieldWide" })
+					@Html.ValidationMessageFor(model => model.Title)
+				</div>
+
+				<div class="formlabel float-left">
+					@Html.LabelFor(model => model.Description)
+				</div>
+				<div class="forminput float-left">
+					@Html.TextAreaFor(model => model.Description, new { @class = "TextareaField" })
+					@Html.ValidationMessageFor(model => model.Description)
+				</div>
+
+				<div class="formlabel float-left">
+					@Html.LabelFor(model => model.PriorityId)
+				</div>
+				<div class="forminput float-left">
+					@Html.DropDownListFor(model => model.PriorityId, Giftlist.DataAccess.DALists.Priorities)
+					@Html.ValidationMessageFor(model => model.PriorityId)
+				</div>
+
+				<div class="formlabel float-left">
+					@Html.LabelFor(model => model.Url)
+				</div>
+				<div class="forminput float-left">
+					@Html.TextBoxFor(model => model.Url, new { @class = "TextboxFieldWide" })
+					@Html.ValidationMessageFor(model => model.Url)
+				</div>
+
+				<div class="formlabel float-left">
+					@Html.LabelFor(model => model.IsActive)
+				</div>
+				<div class="forminput float-left">
+					@Html.CheckBoxFor(model => model.NonNullableIsActive)
+					@Html.ValidationMessageFor(model => model.IsActive)
+				</div>
+
+				<div class="formlabel float-left">
+				</div>
+				<div class="forminput float-left">
+					<input type="submit" value="Save" />
+				</div>
+			</fieldset>
+		}
+		<div>
+			@if (ViewData.ModelState.Values.Any(v => v.Errors.Count > 0))
+			{
+				@ViewData.ModelState["EditItem"].Errors[0].Exception.Message
+			}
+		</div>
+		<div>
+			@Html.ActionLink("Back to List", "Index")
+		</div>
+
+	</div>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="284deb47b85e4f2c88e96299fccaf64c" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="GiftlistModel.ClaimType" Width="1.5" PointX="5.125" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GiftlistModel.Family" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="GiftlistModel.ItemClaim" Width="1.5" PointX="5.125" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GiftlistModel.Item" Width="1.5" PointX="7.125" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GiftlistModel.Priority" Width="1.5" PointX="9.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GiftlistModel.User" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GiftlistModel.UserType" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="GiftlistModel.FK_ItemClaims_Items" />
+        <AssociationConnector Association="GiftlistModel.FK_ItemClaims_Users" />
+        <AssociationConnector Association="GiftlistModel.FK_Items_Priorities" />
+        <AssociationConnector Association="GiftlistModel.FK_Items_Users" />
+        <AssociationConnector Association="GiftlistModel.FK_Users_UserTypes" />
+        <AssociationConnector Association="GiftlistModel.FK_ItemClaims_ClaimTypes" />
+        <AssociationConnector Association="GiftlistModel.UsersFamilies" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
