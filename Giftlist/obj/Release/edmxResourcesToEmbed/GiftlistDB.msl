@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GiftlistModelStoreContainer" CdmEntityContainer="GiftlistEntities">
+    <EntitySetMapping Name="ClaimTypes">
+      <EntityTypeMapping TypeName="GiftlistModel.ClaimType">
+        <MappingFragment StoreEntitySet="ClaimTypes">
+          <ScalarProperty Name="ClaimTypeId" ColumnName="ClaimTypeId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Families">
+      <EntityTypeMapping TypeName="GiftlistModel.Family">
+        <MappingFragment StoreEntitySet="Families">
+          <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemClaims">
+      <EntityTypeMapping TypeName="GiftlistModel.ItemClaim">
+        <MappingFragment StoreEntitySet="ItemClaims">
+          <ScalarProperty Name="ItemClaimId" ColumnName="ItemClaimId" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimTypeId" ColumnName="ClaimTypeId" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DateLastModified" ColumnName="DateLastModified" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Items">
+      <EntityTypeMapping TypeName="GiftlistModel.Item">
+        <MappingFragment StoreEntitySet="Items">
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PriorityId" ColumnName="PriorityId" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="DateLastModified" ColumnName="DateLastModified" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Priorities">
+      <EntityTypeMapping TypeName="GiftlistModel.Priority">
+        <MappingFragment StoreEntitySet="Priorities">
+          <ScalarProperty Name="PriorityId" ColumnName="PriorityId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="GiftlistModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="FName" ColumnName="FName" />
+          <ScalarProperty Name="LName" ColumnName="LName" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTypes">
+      <EntityTypeMapping TypeName="GiftlistModel.UserType">
+        <MappingFragment StoreEntitySet="UserTypes">
+          <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UsersFamilies" TypeName="GiftlistModel.UsersFamilies" StoreEntitySet="UsersFamilies">
+      <EndProperty Name="User">
+        <ScalarProperty Name="UserId" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="Family">
+        <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

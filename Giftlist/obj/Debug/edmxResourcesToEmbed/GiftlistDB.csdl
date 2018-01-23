@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GiftlistModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ClaimType">
+    <Key>
+      <PropertyRef Name="ClaimTypeId" />
+    </Key>
+    <Property Name="ClaimTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ItemClaims" Relationship="GiftlistModel.FK_ItemClaims_ClaimTypes" FromRole="ClaimType" ToRole="ItemClaim" />
+  </EntityType>
+  <EntityType Name="Family">
+    <Key>
+      <PropertyRef Name="FamilyId" />
+    </Key>
+    <Property Name="FamilyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="GiftlistModel.UsersFamilies" FromRole="Family" ToRole="User" />
+  </EntityType>
+  <EntityType Name="ItemClaim">
+    <Key>
+      <PropertyRef Name="ItemClaimId" />
+    </Key>
+    <Property Name="ItemClaimId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ItemId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="ClaimTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateLastModified" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Item" Relationship="GiftlistModel.FK_ItemClaims_Items" FromRole="ItemClaim" ToRole="Item" />
+    <NavigationProperty Name="User" Relationship="GiftlistModel.FK_ItemClaims_Users" FromRole="ItemClaim" ToRole="User" />
+    <NavigationProperty Name="ClaimType" Relationship="GiftlistModel.FK_ItemClaims_ClaimTypes" FromRole="ItemClaim" ToRole="ClaimType" />
+  </EntityType>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="ItemId" />
+    </Key>
+    <Property Name="ItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="PriorityId" Type="Int32" Nullable="false" />
+    <Property Name="Url" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ImagePath" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateLastModified" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="ItemClaims" Relationship="GiftlistModel.FK_ItemClaims_Items" FromRole="Item" ToRole="ItemClaim" />
+    <NavigationProperty Name="Priority" Relationship="GiftlistModel.FK_Items_Priorities" FromRole="Item" ToRole="Priority" />
+    <NavigationProperty Name="User" Relationship="GiftlistModel.FK_Items_Users" FromRole="Item" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Priority">
+    <Key>
+      <PropertyRef Name="PriorityId" />
+    </Key>
+    <Property Name="PriorityId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Items" Relationship="GiftlistModel.FK_Items_Priorities" FromRole="Priority" ToRole="Item" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+    <Property Name="FName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="LName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Birthdate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="ItemClaims" Relationship="GiftlistModel.FK_ItemClaims_Users" FromRole="User" ToRole="ItemClaim" />
+    <NavigationProperty Name="Items" Relationship="GiftlistModel.FK_Items_Users" FromRole="User" ToRole="Item" />
+    <NavigationProperty Name="UserType" Relationship="GiftlistModel.FK_Users_UserTypes" FromRole="User" ToRole="UserType" />
+    <NavigationProperty Name="Families" Relationship="GiftlistModel.UsersFamilies" FromRole="User" ToRole="Family" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="UserTypeId" />
+    </Key>
+    <Property Name="UserTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="GiftlistModel.FK_Users_UserTypes" FromRole="UserType" ToRole="User" />
+  </EntityType>
+  <EntityContainer Name="GiftlistEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ClaimTypes" EntityType="Self.ClaimType" />
+    <EntitySet Name="Families" EntityType="Self.Family" />
+    <EntitySet Name="ItemClaims" EntityType="Self.ItemClaim" />
+    <EntitySet Name="Items" EntityType="Self.Item" />
+    <EntitySet Name="Priorities" EntityType="Self.Priority" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+    <AssociationSet Name="FK_ItemClaims_Items" Association="GiftlistModel.FK_ItemClaims_Items">
+      <End Role="Item" EntitySet="Items" />
+      <End Role="ItemClaim" EntitySet="ItemClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemClaims_Users" Association="GiftlistModel.FK_ItemClaims_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="ItemClaim" EntitySet="ItemClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Items_Priorities" Association="GiftlistModel.FK_Items_Priorities">
+      <End Role="Priority" EntitySet="Priorities" />
+      <End Role="Item" EntitySet="Items" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Items_Users" Association="GiftlistModel.FK_Items_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Item" EntitySet="Items" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_UserTypes" Association="GiftlistModel.FK_Users_UserTypes">
+      <End Role="UserType" EntitySet="UserTypes" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemClaims_ClaimTypes" Association="GiftlistModel.FK_ItemClaims_ClaimTypes">
+      <End Role="ClaimType" EntitySet="ClaimTypes" />
+      <End Role="ItemClaim" EntitySet="ItemClaims" />
+    </AssociationSet>
+    <AssociationSet Name="UsersFamilies" Association="GiftlistModel.UsersFamilies">
+      <End Role="Family" EntitySet="Families" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_ItemClaims_Items">
+    <End Type="GiftlistModel.Item" Role="Item" Multiplicity="1" />
+    <End Type="GiftlistModel.ItemClaim" Role="ItemClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ItemId" />
+      </Principal>
+      <Dependent Role="ItemClaim">
+        <PropertyRef Name="ItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemClaims_Users">
+    <End Type="GiftlistModel.User" Role="User" Multiplicity="1" />
+    <End Type="GiftlistModel.ItemClaim" Role="ItemClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ItemClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Items_Priorities">
+    <End Type="GiftlistModel.Priority" Role="Priority" Multiplicity="1" />
+    <End Type="GiftlistModel.Item" Role="Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Priority">
+        <PropertyRef Name="PriorityId" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="PriorityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Items_Users">
+    <End Type="GiftlistModel.User" Role="User" Multiplicity="1" />
+    <End Type="GiftlistModel.Item" Role="Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_UserTypes">
+    <End Type="GiftlistModel.UserType" Role="UserType" Multiplicity="1" />
+    <End Type="GiftlistModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="UserTypeId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemClaims_ClaimTypes">
+    <End Type="GiftlistModel.ClaimType" Role="ClaimType" Multiplicity="1" />
+    <End Type="GiftlistModel.ItemClaim" Role="ItemClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClaimType">
+        <PropertyRef Name="ClaimTypeId" />
+      </Principal>
+      <Dependent Role="ItemClaim">
+        <PropertyRef Name="ClaimTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsersFamilies">
+    <End Type="GiftlistModel.Family" Role="Family" Multiplicity="*" />
+    <End Type="GiftlistModel.User" Role="User" Multiplicity="*" />
+  </Association>
+</Schema>

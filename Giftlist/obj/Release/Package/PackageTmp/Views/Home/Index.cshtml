@@ -1,0 +1,41 @@
+﻿@using Giftlist.Models
+@using System.Web.Optimization;
+@model LoginModel
+
+@{
+    ViewBag.Title = "Index";
+}
+<!DOCTYPE html>
+	<head>
+		<title>Giftlist | The Lists</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<script src="~/Scripts/jquery-1.10.2.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=Knewave' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Allura' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+		<link href="~/Assets/Style.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="Container">
+			<div style="text-align: center;">
+				<img src="~/Assets/Images/Tree3.png" alt="tree" />
+				<div class="TitleText">The Klassen Giftlist</div>
+			</div>
+			<div class="Login" style="width: 50%; height: 250px; margin: 3em auto; ">
+				@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+				{
+					<div>
+						<h3>Enter your credentials to proceed:</h3>
+						@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+						<div class="formlabel float-left">Username:</div><div class="forminput float-left">@Html.TextBoxFor(m => m.Username, new { @class = "TextboxField" }) @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })</div>
+						<div class="formlabel float-left">Password:</div><div class="forminput float-left">@Html.PasswordFor(m => m.Password, new { @class = "TextboxField" }) @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })</div>
+						<div class="formlabel float-left"></div><div class="forminput float-left"><input type="submit" value="Log in" /></div>
+					</div>
+
+				}
+			</div>
+		</div>
+	</body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
